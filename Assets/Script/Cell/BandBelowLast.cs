@@ -66,10 +66,11 @@ public class BandBelowLast : MonoBehaviour
         {
             TwiceCure = TubeTwiceCure;
         }
+        
 #if UNITY_EDITOR
         BGTwice.sprite = Resources.Load(TwiceCure + data.pic, typeof(Sprite)) as Sprite;
 #else
-        BGImage.sprite = Resources.Load(ImagePath + data.pic, typeof(Sprite)) as Sprite;
+        BGTwice.sprite = Resources.Load(TwiceCure + data.pic, typeof(Sprite)) as Sprite;
 #endif
         BandVole = data;
         LipFiring = AC;
