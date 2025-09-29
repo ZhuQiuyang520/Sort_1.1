@@ -749,7 +749,14 @@ public class CashOutManager : DeedSingleton<CashOutManager>
                //CashOutLog("获取真实IP数据： " + result.downloadHandler.text, false);
                try
                {
-                   var match = System.Text.RegularExpressions.Regex.Match(result.downloadHandler.text, @"IP地址信息:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                   //var match = System.Text.RegularExpressions.Regex.Match(result.downloadHandler.text, @"IP地址信息:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                   string ipPattern = @"(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
+                   var match = System.Text.RegularExpressions.Regex.Match(result.downloadHandler.text, ipPattern);
+                   if (match.Success)
+                   {
+                       RealIP = match.Groups[0].Value;
+                       ReportIDs();
+                   }
                    if (match.Success)
                    {
                        RealIP = match.Groups[1].Value;
